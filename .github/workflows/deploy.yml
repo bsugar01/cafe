@@ -1,9 +1,8 @@
-
-
 on: 
   push:
     branches:
       - main
+
 name: 🚀 Deploy website on push
 
 jobs:
@@ -11,10 +10,14 @@ jobs:
     name: 🎉 Deploy website
     runs-on: ubuntu-latest
     steps:
-    # Checkout the repository
     - name: 🚚 Get latest code
       uses: actions/checkout@v4
-    # sync files via FTP
+
+    - name: 🔍 Check HTML for issues
+      run: |
+        npm install -g htmlhint
+        htmlhint ./ --config .htmlhintrc
+
     - name: 📂 Sync files via FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
@@ -22,4 +25,3 @@ jobs:
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
         server-dir: /public_html/L5SW/Sagar/
-        
