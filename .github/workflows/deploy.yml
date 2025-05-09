@@ -7,7 +7,7 @@ on:
 name: 🚀 Deploy website on push
 
 jobs:
-  web-deploy:
+    web-deploy:
     name: 🎉 Deploy website
     runs-on: ubuntu-latest
 
