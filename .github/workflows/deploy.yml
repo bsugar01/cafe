@@ -19,6 +19,10 @@ jobs:
       - name: Install HTMLHint
         run: npm install -g htmlhint
 
+      # lint html fil
+      - name: Run HTMLHint on HTML files
+        run: htmlhint **/*.html
+
       # Sync files via FTP
       - name: 📂 Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
