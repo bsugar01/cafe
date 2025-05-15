@@ -30,7 +30,12 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
+        run: |
+          terraform plan \
+            -var="subscription_id=${{ secrets.ARM_SUBSCRIPTION_ID }}" \
+            -var="client_id=${{ secrets.ARM_CLIENT_ID }}" \
+            -var="client_secret=${{ secrets.ARM_CLIENT_SECRET }}" \
+            -var="tenant_id=${{ secrets.ARM_TENANT_ID }}"
 
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
