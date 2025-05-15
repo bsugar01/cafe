@@ -36,7 +36,7 @@ resource "azurerm_storage_account_static_website" "website" {
 }
 
 output "static_website_url" {
-  value       = azurerm_storage_account_static_website.website.primary_web_endpoint
+  value       = azurerm_storage_account.static_site.primary_web_endpoint
   description = "URL to access your deployed static website"
 }
 
