@@ -23,7 +23,7 @@ jobs:
       - name: Run HTMLHint on HTML files
         run: htmlhint "**/*.html"
 
-      - name: Setip Terrform
+      - name: Setup Terrform
         uses: hasicorp/setup-terraform@v3
 
       # Sync files via FTP
