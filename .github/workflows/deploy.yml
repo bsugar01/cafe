@@ -23,6 +23,9 @@ jobs:
       - name: Run HTMLHint on HTML files
         run: htmlhint "**/*.html"
 
+      - name: Setip Terrform
+        uses: hasicorp/setup-terraform@v3
+
       # Sync files via FTP
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
