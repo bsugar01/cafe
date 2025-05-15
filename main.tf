@@ -1,11 +1,25 @@
-provider "aws" {
-  region = "us-east-1"
+provider "azurerm" {
+  features {}
 }
 
-resource "aws_s3_bucket" "website_bucket" {
-  bucket = "my-html-website-bucket"
-  website {
-    index_document = "index.html"
-    error_document = "404.html"
+resource "azurerm_resource_group" "rg" {
+  name     = "cafe-website-rg"
+  location = "UK South"
+}
+
+resource "azurerm_storage_account" "static_site" {
+  name                     = "cafestaticsite${random_id.unique.hex}"  # Must be globally unique
+  resource_group_name      = azurerm_resource_group.rg.name
+  location                 = azurerm_resource_group.rg.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  static_website {
+    index_document     = "index.html"
+    error_404_document = "404.html"
   }
+}
+
+resource "random_id" "unique" {
+  byte_length = 4
 }
