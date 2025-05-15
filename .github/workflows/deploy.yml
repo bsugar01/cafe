@@ -11,22 +11,27 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repository
       - name: Get latest code
         uses: actions/checkout@v4
 
-      # Install HTMLHint (HTML linting tool)
       - name: Install HTMLHint
         run: npm install -g htmlhint
 
-      # Lint HTML files
       - name: Run HTMLHint on HTML files
         run: htmlhint "**/*.html"
 
-      - name: Setup Terrform
-        uses: hasicorp/setup-terraform@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
-      # Sync files via FTP
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
       - name: Sync files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
